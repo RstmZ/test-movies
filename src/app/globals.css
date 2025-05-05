@@ -20,6 +20,7 @@
   --color-input: var(--input);
   --radius-input: var(--radius-primary);
   --radius-checkbox: var(--checkbox-radius);
+  --spacing-120: 120px
 }
 
 @media (prefers-color-scheme: dark) {

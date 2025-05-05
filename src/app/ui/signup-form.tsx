@@ -1,24 +1,9 @@
 'use client';
 import { login, signup } from '@/app/actions/auth';
-import { FC, InputHTMLAttributes, useActionState } from 'react';
+import { FC, useActionState } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import Link from 'next/link';
-import { Spinner } from 'flowbite-react';
-
-const Input: FC<{ extra?: string } & InputHTMLAttributes<HTMLInputElement>> = ({
-  extra,
-  ...props
-}) => {
-  const getStyle = () => {
-    switch (props.type) {
-      case 'checkbox':
-        return `rounded-[5px] px-4 accent-input py-2.5 w-5 h-5 ${extra}`;
-      default:
-        return `h-[45px] bg-input w-[300px] rounded-input px-4 py-2.5 ${extra}`;
-    }
-  };
-  return <input {...props} className={getStyle()} />;
-};
+import { Input } from '@/app/ui/Input';
 
 export const SignupForm: FC<{ type: 'login' | 'signup' }> = ({ type }) => {
   const [signupState, signupAction, signupPending] = useActionState(signup, undefined);

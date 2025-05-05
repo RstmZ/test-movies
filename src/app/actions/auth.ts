@@ -1,10 +1,10 @@
 'use server';
-import { SignupFormSchema, FormState } from '@/app/lib/definitions';
+import { SignupFormSchema, AuthFormState } from '@/app/lib/definitions';
 import prisma from '@/app/lib/prisma';
 import bcrypt from 'bcryptjs';
 import { deleteSession, set } from '@/app/lib/session';
 import { redirect } from 'next/navigation';
-export async function signup(state: FormState, formData: FormData) {
+export async function signup(state: AuthFormState, formData: FormData) {
   // Validate form fields
   console.log(formData);
   const validatedFields = SignupFormSchema.safeParse({
@@ -52,7 +52,7 @@ export async function signup(state: FormState, formData: FormData) {
   // 5. Redirect user
   redirect('/movies');
 }
-export async function login(state: FormState, formData: FormData) {
+export async function login(state: AuthFormState, formData: FormData) {
   const validatedFields = SignupFormSchema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
