@@ -1,0 +1,36 @@
+@import 'tailwindcss';
+@config "../../tailwind.config.js";
+
+:root {
+  --background: #093545;
+  --input: #224957;
+  --card: #092c39;
+  --error: #eb5757;
+  --primary: #2bd17e;
+  --radius-primary: 10px;
+  --checkbox-radius: 5px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-error: var(--error);
+  --color-card: var(--card);
+  --color-input: var(--input);
+  --radius-input: var(--radius-primary);
+  --radius-checkbox: var(--checkbox-radius);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: white;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
