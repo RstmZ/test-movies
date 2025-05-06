@@ -18,7 +18,7 @@ export const MovieCard: FC<{ movie: Movie }> = ({
     >
       <div
         className={
-          'flex flex-row items-center justify-between gap-2 relative w-full rounded-input overflow-hidden bg-black h-[246px] lg:h-3/4 py-5'
+          'flex flex-row items-center justify-between gap-2 relative w-full rounded-input overflow-hidden bg-black h-[246px] lg:h-[400px] py-5'
         }
       >
         {poster ? (
@@ -34,14 +34,14 @@ export const MovieCard: FC<{ movie: Movie }> = ({
       <div className={'p-2 flex flex-col  gap-2 '}>
         <p
           className={
-            'text-brand text-sm lg:text-base group-hover:text-deep-purple transition-all duration-300'
+            'text-base lg:text-xl group-hover:text-deep-purple transition-all duration-300'
           }
         >
           {title}
         </p>
         <p
           className={
-            'text-brand text-[10px] lg:text-xs group-hover:text-deep-purple transition-all duration-300'
+            ' text-[10px] lg:text-sm group-hover:text-deep-purple transition-all duration-300'
           }
         >
           {publishingYear}
