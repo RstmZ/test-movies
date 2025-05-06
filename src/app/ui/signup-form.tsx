@@ -59,7 +59,7 @@ export const SignupForm: FC<{ type: 'login' | 'signup' }> = ({ type }) => {
       {type === 'signup' ? (
         <p className={'text-body-regular text-center mt-2'}>
           Do you have an account?{' '}
-          <Link href={'/src/app/(routes)/auth/login'} className={'text-primary'}>
+          <Link href={'/auth/login'} className={'text-primary'}>
             {' '}
             Login
           </Link>
@@ -67,7 +67,7 @@ export const SignupForm: FC<{ type: 'login' | 'signup' }> = ({ type }) => {
       ) : (
         <p className={'text-body-regular text-center mt-2'}>
           You don`t have an account.{' '}
-          <Link href={'/src/app/(routes)/auth/signup'} className={'text-primary'}>
+          <Link href={'/auth/signup'} className={'text-primary'}>
             {' '}
             Signup
           </Link>

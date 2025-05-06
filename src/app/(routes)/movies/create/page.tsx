@@ -2,7 +2,7 @@
 
 import { UpdateOrSaveMovie } from '@/app/ui/updateOrSaveMovie';
 
-export default function Page({ params }: { params: { id?: string } }) {
+export default function Page() {
   return (
     <div className={'p-120 h-full flex flex-col '}>
       <div className={'flex justify-between'}>
@@ -10,7 +10,7 @@ export default function Page({ params }: { params: { id?: string } }) {
           <h1 className={'text-heading-two font-heading'}> Create a new movie </h1>{' '}
         </div>
       </div>
-      <UpdateOrSaveMovie id={!isNaN(Number(params.id)) ? Number(params.id) : undefined} />
+      <UpdateOrSaveMovie />
     </div>
   );
 }
