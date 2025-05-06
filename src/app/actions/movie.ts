@@ -9,7 +9,7 @@ export const createMovie = async (state: MovieFormState, formData: FormData) => 
   const validatedFields = MovieFormSchema.safeParse({
     title: formData.get('title'),
     year: formData.get('year'),
-    image: formData.get('image'),
+    image: formData.get('image') ?? null,
     id: formData.get('id') ?? '',
     prevImage: formData.get('prevImage') ?? '',
   });
@@ -47,7 +47,6 @@ export const createMovie = async (state: MovieFormState, formData: FormData) => 
     console.log(e);
     return { message: 'Something went wrong.Try again later.' };
   }
-
   redirect('/movies');
 };
 

@@ -4,18 +4,13 @@ import Image from 'next/image';
 import { BsDownload } from 'react-icons/bs';
 
 export const FileInput: FC<{
-  onChange: (file: File) => void;
   image?: string;
-}> = ({ onChange, image }) => {
+}> = ({ image }) => {
   const [images, setImages] = useState<File | null>(null);
-  const onDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      // Do something with the files
-      setImages(acceptedFiles[0]);
-      onChange(acceptedFiles[0]);
-    },
-    [onChange]
-  );
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    // Do something with the files
+    setImages(acceptedFiles[0]);
+  }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     maxFiles: 1,

@@ -9,9 +9,6 @@ import { useRouter } from 'next/navigation';
 import { useMovie } from '@/app/lib/hooks/useMovie';
 
 export const UpdateOrSaveMovie: FC<{ id?: number }> = ({ id }) => {
-  const onChange = async () => {
-    console.log('g');
-  };
   const { data, isLoading } = useMovie(Number(id));
   const [state, action, pending] = useActionState(createMovie, undefined);
   const router = useRouter();
@@ -36,7 +33,7 @@ export const UpdateOrSaveMovie: FC<{ id?: number }> = ({ id }) => {
           'flex flex-col-reverse lg:flex-row gap-32 w-full h-full items-center lg:items-start'
         }
       >
-        <FileInput onChange={onChange} image={data?.poster} />
+        <FileInput image={data?.poster} />
         <div className={'gap-6 flex flex-col w-full lg:w-[362px] '}>
           <div className="flex flex-col">
             <Input
@@ -74,6 +71,7 @@ export const UpdateOrSaveMovie: FC<{ id?: number }> = ({ id }) => {
               disabled={pending}
               type="submit"
               className={'border border-white rounded-input py-4 flex-1 '}
+              onClick={() => router.back()}
             >
               Cancel
             </button>
