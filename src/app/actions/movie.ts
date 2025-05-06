@@ -19,15 +19,15 @@ export const createMovie = async (state: MovieFormState, formData: FormData) => 
     };
   }
 
-  const { image, title, year, id } = validatedFields.data;
+  const { image, title, year, id, prevImage } = validatedFields.data;
 
   try {
     const { url } = await saveImage({ image });
     console.log(url);
     if (id) {
-      //   if (image && prevImage) {
-      //     await deleteImage({ url: prevImage });
-      //   }
+      if (image && prevImage) {
+        await deleteImage({ url: prevImage });
+      }
 
       await prisma.movie.update({
         where: {

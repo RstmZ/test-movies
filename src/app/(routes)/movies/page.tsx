@@ -4,9 +4,12 @@ import { IoAddCircleOutline } from 'react-icons/io5';
 import Link from 'next/link';
 import { deleteSession } from '@/app/lib/session';
 import { MdOutlineLogout } from 'react-icons/md';
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Loader } from '@/app/ui/Loader';
 import { MovieCard } from '@/app/ui/MovieCard';
+
+import ReactPaginate from 'react-paginate';
 import { useMovies } from '@/app/lib/hooks/useMovies';
 
 export default function Page() {
@@ -45,21 +48,23 @@ export default function Page() {
           return <MovieCard key={movie.id} movie={movie} />;
         })}
       </div>
-      <div className={'flex items-center w-full justify-center gap-2 '}>
-        <button
-          className={'cursor-pointer'}
-          disabled={page === 1}
-          onClick={() => setPage((p) => Math.max(p - 1, 1))}
-        >
-          Prev
-        </button>
-        <button
-          className={'cursor-pointer'}
-          disabled={page === data?.totalPages}
-          onClick={() => setPage((p) => p + 1)}
-        >
-          Next
-        </button>
+      <div className={'flex items-center w-full justify-center gap-2 mt-6'}>
+        {data?.totalPages && data.totalPages > 1 ? (
+          <ReactPaginate
+            className={'flex gap-2 items-center'}
+            breakLabel="..."
+            nextLabel="NEXT"
+            onPageChange={({ selected }) => setPage(selected)}
+            pageRangeDisplayed={5}
+            pageCount={data?.totalPages}
+            previousLabel="PREV"
+            renderOnZeroPageCount={null}
+            nextLinkClassName={'cursor-pointer '}
+            previousClassName={'cursor-pointer'}
+            activeClassName={'bg-primary'}
+            pageClassName={`cursor-pointer bg-card text-white rounded-input h-8 w-8  text-center flex items-center justify-center`}
+          />
+        ) : null}
       </div>
       {isLoading ? <Loader /> : null}
     </div>

@@ -21,12 +21,14 @@ export const MovieCard: FC<{ movie: Movie }> = ({
           'flex flex-row items-center justify-between gap-2 relative w-full rounded-input overflow-hidden bg-black h-[246px] lg:h-3/4 py-5'
         }
       >
-        <Image
-          src={poster}
-          fill
-          className={'w-full object-contain rounded-input overflow-hidden'}
-          alt={'d'}
-        />
+        {poster ? (
+          <Image
+            src={poster}
+            fill
+            className={'w-full object-contain rounded-input overflow-hidden'}
+            alt={'d'}
+          />
+        ) : null}
       </div>
 
       <div className={'p-2 flex flex-col  gap-2 '}>
