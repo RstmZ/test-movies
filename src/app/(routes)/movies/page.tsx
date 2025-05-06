@@ -14,11 +14,6 @@ import { useMovies } from '@/app/lib/hooks/useMovies';
 export default function Page() {
   const [page, setPage] = useState(1);
   const { data, isLoading } = useMovies(page);
-  // const queryClient = getQueryClient();
-  //
-  // useEffect(() => {
-  //   queryClient.invalidateQueries({ queryKey: ['movies'] });
-  // }, [queryClient]);
   return (
     <div className={'p-6  xl:p-120 lg:p-12'}>
       <div className={'flex justify-between'}>
@@ -53,7 +48,7 @@ export default function Page() {
             className={'flex gap-2 items-center'}
             breakLabel="..."
             nextLabel="NEXT"
-            onPageChange={({ selected }) => setPage(selected)}
+            onPageChange={({ selected }) => setPage(selected + 1)}
             pageRangeDisplayed={5}
             pageCount={data?.totalPages}
             previousLabel="PREV"
@@ -66,6 +61,7 @@ export default function Page() {
         ) : null}
       </div>
       {isLoading ? <Loader /> : null}
+      {/*<Loader />*/}
     </div>
   );
 }

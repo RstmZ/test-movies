@@ -23,7 +23,6 @@ export const createMovie = async (state: MovieFormState, formData: FormData) => 
 
   try {
     const { url } = await saveImage({ image });
-    console.log(url);
     if (id) {
       if (image && prevImage) {
         await deleteImage({ url: prevImage });

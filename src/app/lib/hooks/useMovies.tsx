@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 
 export type Movie = {
   id: number;
@@ -14,6 +14,7 @@ type PaginatedMoviesResponse = {
 };
 
 export function useMovies(page: number, limit: number = 8) {
+  console.log(page);
   return useQuery<PaginatedMoviesResponse>({
     queryKey: ['movies', page, limit],
     queryFn: async (): Promise<PaginatedMoviesResponse> => {
@@ -23,5 +24,6 @@ export function useMovies(page: number, limit: number = 8) {
       }
       return res.json();
     },
+    placeholderData: keepPreviousData,
   });
 }
