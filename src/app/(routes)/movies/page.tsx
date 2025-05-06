@@ -4,7 +4,6 @@ import { IoAddCircleOutline } from 'react-icons/io5';
 import Link from 'next/link';
 import { deleteSession } from '@/app/lib/session';
 import { MdOutlineLogout } from 'react-icons/md';
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Loader } from '@/app/ui/Loader';
 import { MovieCard } from '@/app/ui/MovieCard';
