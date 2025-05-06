@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './globals.css';
-import Image from 'next/image';
+import Providers from '@/Providers';
 
 const geistSans = Montserrat({
   variable: '--font-monserrat-sans',
@@ -26,9 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-heading- antialiased text-white h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} font-heading- antialiased text-white `}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

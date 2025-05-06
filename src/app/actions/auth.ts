@@ -48,7 +48,7 @@ export async function signup(state: AuthFormState, formData: FormData) {
       message: 'An error occurred while creating your account.',
     };
   }
-  await set(user.id.toString(), user.email);
+  await set(user.id.toString());
   // 5. Redirect user
   redirect('/movies');
 }
@@ -78,9 +78,9 @@ export async function login(state: AuthFormState, formData: FormData) {
       message: 'Incorrect password. Please try again.',
     };
   }
-  if (validatedFields.data.rememberMe === 'on') {
-    await set(userExist.id.toString(), userExist.email);
-  }
+  // if (validatedFields.data.rememberMe === 'on') {
+  await set(userExist.id.toString());
+  // }
 
   redirect('/movies');
 }

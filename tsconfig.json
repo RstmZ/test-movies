@@ -1,7 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "typeRoots": ["./types", "./node_modules/@types", "next-env.d.ts"],
+
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,9 +25,26 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@prisma/client": [
+        "./src/app/generated"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.js"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "tailwind.config.js",
+    "prisma/*",
+    "src/app/generated/prisma/libquery_engine-debian-openssl-3.0.x.so.node"
+  ]
+  //  "exclude": ["node_modules"]
+  ,
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -29,6 +29,8 @@ export const MovieFormSchema = z.object({
       (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
       'Only .jpg, .jpeg, .png and .webp formats are supported.'
     ),
+  id: z.string().optional().nullable(),
+  prevImage: z.string().optional().nullable(),
 });
 
 export type AuthFormState =

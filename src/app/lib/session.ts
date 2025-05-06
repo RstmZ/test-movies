@@ -26,12 +26,13 @@ export async function getSessionIdAndCreateIfMissing() {
 
   return sessionId;
 }
-export async function get(key: string, namespace: string = '') {
+export async function get(namespace: string = '') {
   const sessionId = await getSessionId();
+  console.log(sessionId);
   if (!sessionId) {
     return null;
   }
-  return redis.hget(`session-${namespace}-${sessionId}`, key);
+  return await redis.hget(`session-${namespace}-${sessionId}`, 'userId');
 }
 export async function deleteSession(namespace: string = '') {
   const sessionId = await getSessionId();
@@ -49,8 +50,10 @@ export async function getAll(namespace: string = '') {
   return redis.hgetall(`session-${namespace}-${sessionId}`);
 }
 
-export async function set(key: string, value: string, namespace: string = '') {
+export async function set(key: string, namespace: string = '') {
   const sessionId = await getSessionIdAndCreateIfMissing();
-  console.log(sessionId);
-  return redis.hset(`session-${namespace}-${sessionId}`, { key, value });
+
+  return await redis.hset(`session-${namespace}-${sessionId}`, {
+    ['userId']: key,
+  });
 }

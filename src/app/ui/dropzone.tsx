@@ -5,14 +5,18 @@ import { BsDownload } from 'react-icons/bs';
 
 export const FileInput: FC<{
   onChange: (file: File) => void;
-}> = ({ onChange }) => {
+  image?: string;
+}> = ({ onChange, image }) => {
   const [images, setImages] = useState<File | null>(null);
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    // Do something with the files
-    setImages(acceptedFiles[0]);
-    onChange(acceptedFiles[0]);
-  }, []);
-  const { getRootProps, getInputProps, isDragActive, inputRef } = useDropzone({
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      // Do something with the files
+      setImages(acceptedFiles[0]);
+      onChange(acceptedFiles[0]);
+    },
+    [onChange]
+  );
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     maxFiles: 1,
   });
@@ -21,7 +25,7 @@ export const FileInput: FC<{
     <div
       {...getRootProps()}
       className={
-        'w-[473px] max-h-[504px] max-w-[473px] h-full  p-3 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 flex   flex-row items-center justify-between rounded-input border-white border-dashed bg-input text-xs text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-50 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400  md:text-sm'
+        'w-full lg:w-[473px] max-h-[504px] max-w-[473px] h-full  p-3 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 flex   flex-row items-center justify-between rounded-input border-white border-dashed bg-input text-xs text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-50 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400  md:text-sm'
       }
     >
       <input name={'image'} {...getInputProps()} />
@@ -34,7 +38,7 @@ export const FileInput: FC<{
               }
             >
               <Image
-                src={URL.createObjectURL(images)}
+                src={image || URL.createObjectURL(images)}
                 fill
                 alt="image"
                 className="absolute bottom-0 left-0 w-full object-contain p-2"
@@ -45,7 +49,7 @@ export const FileInput: FC<{
               <button
                 className={'text-xs  font-semibold  lg:text-sm'}
                 type={'button'}
-                onClick={(e: any) => {
+                onClick={(e) => {
                   e.stopPropagation();
                   setImages(null);
                 }}

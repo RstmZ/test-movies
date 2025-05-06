@@ -1,34 +1,72 @@
-import { put } from '@vercel/blob';
+'use server';
+
+import { put, del } from '@vercel/blob';
 import { MovieFormSchema, MovieFormState } from '@/app/lib/definitions';
 import prisma from '@/app/lib/prisma';
-import bcrypt from 'bcryptjs';
-import { set } from '@/app/lib/session';
+import { redirect } from 'next/navigation';
 
-export const createMovie = (state: MovieFormState, formData: FormData) => {
+export const createMovie = async (state: MovieFormState, formData: FormData) => {
   const validatedFields = MovieFormSchema.safeParse({
     title: formData.get('title'),
     year: formData.get('year'),
     image: formData.get('image'),
+    id: formData.get('id') ?? '',
+    prevImage: formData.get('prevImage') ?? '',
   });
-
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
     };
   }
 
-  const { year, title, image } = validatedFields.data;
+  const { image, title, year, id } = validatedFields.data;
 
-  if (!title) {
-    return { message: 'ddd' };
+  try {
+    const { url } = await saveImage({ image });
+    console.log(url);
+    if (id) {
+      //   if (image && prevImage) {
+      //     await deleteImage({ url: prevImage });
+      //   }
+
+      await prisma.movie.update({
+        where: {
+          id: Number(id),
+        },
+        data: {
+          publishingYear: Number(year),
+          title,
+          poster: url,
+        },
+      });
+    } else {
+      await prisma.movie.create({ data: { publishingYear: Number(year), title, poster: url } });
+    }
+    console.log('sfs');
+  } catch (e) {
+    console.log(e);
+    return { message: 'Something went wrong.Try again later.' };
   }
+
+  redirect('/movies');
 };
 
-export const updateMovie = () => {};
-export const saveImage = async ({ image, id }: { image: File; id: number }) => {
-  await put(id.toString() + image.name.match(/([.].+)$/g), image, {
-    access: 'public',
-    token: process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN,
-    allowOverwrite: true,
-  });
+export const updateMovie = async () => {};
+export const saveImage = async ({ image }: { image: File }) => {
+  try {
+    return await put(image.name, image, {
+      access: 'public',
+      allowOverwrite: true,
+    });
+  } catch (e) {
+    console.log(e);
+    return { url: '' };
+  }
+};
+export const deleteImage = async ({ url }: { url: string }) => {
+  try {
+    await del(url);
+  } catch (e) {
+    console.log(e);
+  }
 };
