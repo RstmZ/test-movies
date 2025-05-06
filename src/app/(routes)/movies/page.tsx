@@ -10,12 +10,13 @@ import { MovieCard } from '@/app/ui/MovieCard';
 
 import ReactPaginate from 'react-paginate';
 import { useMovies } from '@/app/lib/hooks/useMovies';
+import { NoMoviesComponent } from '@/app/ui/NoMoviesComponent';
 
 export default function Page() {
   const [page, setPage] = useState(1);
   const { data, isLoading } = useMovies(page);
   return (
-    <div className={'p-6  xl:p-120 lg:p-12'}>
+    <div className={'p-6  xl:p-120 lg:p-12 h-screen'}>
       <div className={'flex justify-between'}>
         <div className={'flex gap-2 items-center '}>
           <h1 className={'text-heading-two font-heading'}> Movies</h1>{' '}
@@ -32,6 +33,8 @@ export default function Page() {
           <MdOutlineLogout className={'h-8 w-8'} />
         </Link>
       </div>
+      {!data?.data.length && !isLoading ? <NoMoviesComponent /> : null}
+
       <div
         className={
           'grid grid-cols-2 max-w-[calc(180px+180px+24px)] m-auto lg:grid-cols-4 gap-5 lg:gap-6 lg:max-w-[calc(282px*4+24px*3)] mt-[128px] place-items-center'
