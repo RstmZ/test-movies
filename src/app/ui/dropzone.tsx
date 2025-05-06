@@ -1,6 +1,7 @@
 import React, { FC, useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import Image from 'next/image';
+import { BsDownload } from 'react-icons/bs';
 
 export const FileInput: FC<{
   onChange: (file: File) => void;
@@ -40,7 +41,7 @@ export const FileInput: FC<{
               />
             </div>
             <p className={'text-xs    lg:text-sm'}>{images.name}</p>
-            <div className={'flex flex-row items-center '}>
+            <div className={'flex flex-row items-center gap-2'}>
               <button
                 className={'text-xs  font-semibold  lg:text-sm'}
                 type={'button'}
@@ -55,7 +56,7 @@ export const FileInput: FC<{
               <button
                 type={'button'}
                 className={
-                  ' bg-primary  p-0  text-center text-xs font-semibold dark:bg-blue-300 lg:text-sm'
+                  ' bg-primary  p-2 rounded-input  text-center text-xs font-semibold dark:bg-blue-300 lg:text-sm'
                 }
               >
                 Upload new
@@ -65,11 +66,18 @@ export const FileInput: FC<{
         ) : (
           <>
             {isDragActive ? (
-              <p className={'text-xs    lg:text-sm w-3/4'}>Drop an image here</p>
+              <div className={'flex h-full w-full flex-col items-center justify-center'}>
+                <BsDownload />
+                <p className={'text-xs    lg:text-sm w-3/4'}>Drop an image here</p>
+              </div>
             ) : (
-              <p className={'text-xs    lg:text-sm w-3/4 text-center'}>
-                Drag and drop image here or select from your device
-              </p>
+              <div className={'flex h-full w-full flex-col items-center justify-center'}>
+                <BsDownload />
+
+                <p className={'text-xs   self-center lg:text-sm w-3/4 text-center'}>
+                  Drag and drop image here or select from your device
+                </p>
+              </div>
             )}
           </>
         )}

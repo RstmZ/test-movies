@@ -14,9 +14,9 @@ export const UpdateOrSaveMovie: FC<{ id?: number }> = ({ id }) => {
   return (
     <form action={action} className="flex-col flex mt-120 flex-grow ">
       {state?.message && <p className="text-error text-heading-3">{state.message}</p>}
-      <div className={'flex gap-32 w-full'}>
+      <div className={'flex gap-32 w-full h-full'}>
         <FileInput onChange={onChange} />
-        <div className={'gap-6 flex flex-col w-[362px]'}>
+        <div className={'gap-6 flex flex-col w-[362px] '}>
           <div className="flex flex-col">
             <Input type="text" placeholder="Title" name="title" extra={'w-full'} />
             {state?.errors?.title && <p className="text-error">{state.errors.title}</p>}
